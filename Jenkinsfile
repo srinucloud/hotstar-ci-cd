@@ -27,21 +27,13 @@ pipeline {
 
         stage('OWASP Dependency Check') {
             steps {
-                dependencyCheck(
-                    odcInstallation: 'dependency-check',
-                    nvdCredentialsId: 'NVDAPIKey',
-                    additionalArguments: '--scan . --format XML --format HTML'
-                )
+                dependencyCheck additionalArguments: '', debug: true, nvdCredentialsId: 'NVDAPIKey', odcInstallation: 'dependency-check'
             }
         }
 
         stage('Publish OWASP Report') {
             steps {
-                dependencyCheckPublisher(
-                    pattern: '**/dependency-check-report.xml',
-                    stopBuild: false,
-                    skipNoReportFiles: true
-                )
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
 
