@@ -20,7 +20,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarqube-api') {
-                    sh 'mvn sonar:sonar'
+                    sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=hotstarapp -Dsonar.sources=.'
                 }
             }
         }
