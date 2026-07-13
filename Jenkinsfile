@@ -25,6 +25,27 @@ pipeline {
             }
         }
 
+        stage('OWASP Dependency Check') {
+            steps {
+                dependencyCheck(
+                    odcInstallation: 'dependency-check',
+                    nvdCredentialsId: 'NVDAPIKey',
+                    format: 'ALL',
+                    additionalArguments: '--scan .'
+                )
+            }
+        }
+
+        stage('Publish OWASP Report') {
+            steps {
+                dependencyCheckPublisher(
+                    pattern: '**/dependency-check-report.xml',
+                    stopBuild: false,
+                    skipNoReportFiles: true
+                )
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
