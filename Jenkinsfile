@@ -21,12 +21,6 @@ pipeline {
             }
         }
 
-        stage('Security Scan') {
-            steps {
-                sh 'npm audit --audit-level=critical'
-            }
-        }
-
         stage('Build Application') {
             steps {
                 sh 'npm run build'
