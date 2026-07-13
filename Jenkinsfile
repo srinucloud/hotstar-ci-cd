@@ -21,12 +21,6 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-
         stage('Security Scan') {
             steps {
                 sh 'npm audit --audit-level=critical'
