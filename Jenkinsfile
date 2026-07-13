@@ -30,8 +30,7 @@ pipeline {
                 dependencyCheck(
                     odcInstallation: 'dependency-check',
                     nvdCredentialsId: 'NVDAPIKey',
-                    format: 'ALL',
-                    additionalArguments: '--scan .'
+                    additionalArguments: '--scan . --format XML --format HTML'
                 )
             }
         }
@@ -53,7 +52,7 @@ pipeline {
                         ${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=hotstar \
                         -Dsonar.projectName=hotstar \
-                        -Dsonar.sources=.
+                        -Dsonar.sources=src
                     """
                 }
             }
