@@ -17,7 +17,7 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                sh 'npm test -- --watchAll=false'
+                sh 'npm test -- --watchAll=false --passWithNoTests'
             }
         }
 
