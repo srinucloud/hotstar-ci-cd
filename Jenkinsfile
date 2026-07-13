@@ -19,11 +19,9 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                sonarCodeAnalysis(
-                    projectKey: 'hotstar',
-                    projectName: 'hotstarapp',
-                    sources: 'src'
-                )
+                withSonarQubeEnv(credentialsId: 'sonarqube-api') {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
 
