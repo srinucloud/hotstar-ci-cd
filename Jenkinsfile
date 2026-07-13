@@ -57,5 +57,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Trivy file scan') {
+            steps {
+                sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL --no-progress . > trivy-report.txt || true'
+            }
+        }
     }
 }
