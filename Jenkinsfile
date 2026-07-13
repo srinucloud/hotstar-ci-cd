@@ -11,5 +11,11 @@ pipeline {
                 )
             }
         }
+
+        stage('Unit Testing') {
+            steps {
+                unitTesting()
+            }
+        }
     }
 }
