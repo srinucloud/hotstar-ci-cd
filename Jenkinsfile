@@ -27,8 +27,11 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar-server') {
-                    sh '$SONARQUBE_SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=hotstar -Dsonar.projectKey=hotstar -Dsonar.sources=.'
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    $SONARQUBE_SCANNER_HOME/bin/sonar-scanner 
+                    -Dsonar.projectName=hotstar 
+                    -Dsonar.projectKey=hotstar'''
                 }
             }
         }
