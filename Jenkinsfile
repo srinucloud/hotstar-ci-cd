@@ -17,5 +17,15 @@ pipeline {
                 unitTesting()
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                sonarCodeAnalysis(
+                    projectKey: 'hotstar',
+                    projectName: 'hotstarapp',
+                    sources: 'src'
+                )
+            }
+        }
+
     }
 }
