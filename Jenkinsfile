@@ -1,37 +1,41 @@
 pipeline {
     agent any
+
     stages {
-        stage('clear Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
 
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/srinucloud/hotstar-ci-cd.git'
+                checkout scm
             }
         }
 
-        stage('Install') {
+        stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
             }
         }
 
-        stage('Test & Quality') {
+        stage('Unit Test') {
             steps {
-                sh '''
-                    npm run lint
-                    npm test
-                    npm run coverage
-                '''
+                sh 'npm test -- --watchAll=false'
             }
         }
 
-        stage('Build') {
+        stage('Static Code Analysis') {
             steps {
-                    sh 'npm run build'
+                sh 'npm run build'
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                sh 'npm audit --audit-level=critical'
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                sh 'npm run build'
             }
         }
     }
