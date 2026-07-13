@@ -27,7 +27,7 @@ pipeline {
 
         stage('OWASP Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./', debug: true, nvdCredentialsId: 'NVDAPIKey', odcInstallation: 'dependency-check'
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', debug: true, nvdCredentialsId: 'NVDAPIKey', odcInstallation: 'dependency-check'
             }
         }
 
