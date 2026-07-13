@@ -7,7 +7,7 @@ pipeline {
             steps {
                 gitCheckout(
                     branch: 'main',
-                    url: 'https://github.com/srinucloud/hotstar-ci-cd.git'
+                    repoUrl: 'https://github.com/srinucloud/hotstar-ci-cd.git'
                 )
             }
         }
