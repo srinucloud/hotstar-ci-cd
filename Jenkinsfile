@@ -75,5 +75,11 @@ pipeline {
                 }
             }
         }
+
+        stage('trivy image scan') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL --no-progress srinu0930/hotstar:latest > trivy-image-report.txt || true'
+            }
+        }
     }
 }
