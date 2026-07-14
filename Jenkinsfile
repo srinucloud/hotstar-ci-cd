@@ -66,7 +66,7 @@ pipeline {
 
         stage('docker build & Push') {
             steps {
-                withDockerRegistry(credentialsId: 'docker_creds', toolName: 'docker', url: 'https://index.docker.io/v1/') {
+                withDockerRegistry(credentialsId: 'docker_creds', url: 'https://index.docker.io/v1/') {
                     sh '''
                     docker build -t hotstar:latest .
                     docker tag hotstar:latest srinu0930/hotstar:latest
