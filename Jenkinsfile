@@ -63,5 +63,17 @@ pipeline {
                 sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL --no-progress . > trivy-report.txt || true'
             }
         }
+
+        stage('docker build & Push') {
+            steps {
+                withDockerRegistry(credentialsId: 'docker_creds', toolName: 'docker', url: 'https://index.docker.io/v1/') {
+                    sh '''
+                    docker build -t hotstar:latest .
+                    docker tag hotstar:latest srinu0930/hotstar:latest
+                    docker push srinu0930/hotstar:latest
+                    '''
+                }
+            }
+        }
     }
 }
